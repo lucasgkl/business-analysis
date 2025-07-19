@@ -1,0 +1,91 @@
+name: business-analysis
+recipe: laravel
+
+# Configurações do Laravel
+config:
+  webroot: public
+  php: 8.2
+  xdebug: true
+  conf:
+    php: .lando/php.ini
+
+# Serviços adicionais
+services:
+  # Banco de dados MariaDB
+  database:
+    type: mariadb:10.6.12
+    portforward: 3377  # Permite conexão externa (ex: Workbench)
+    host: 0.0.0.0
+    creds:
+      database: business-analysis
+      user: laravel
+      password: laravel
+
+  # PHPMyAdmin acessando o banco acima
+  pma:
+    type: phpmyadmin
+    hosts:
+      - database
+
+  # Mailhog para testar e-mails localmente
+  mailhog:
+    type: mailhog
+    portforward: false
+    hogfrom:
+      - appserver
+
+  # Node.js para compilar assets (npm, yarn, vite, etc.)
+  node:
+    type: node:18
+    scanner: false
+    ports:
+      - 3019:3019
+    build:
+      - npm install
+    ssl: true
+
+# Comandos úteis integrados (lando <comando>)
+tooling:
+  artisan:
+    service: appserver
+    description: Run Laravel Artisan commands
+
+  tinker:
+    service: appserver
+    cmd: php artisan tinker
+    description: Interactive shell
+
+  composer:
+    service: appserver
+
+  doctrine-dbal:
+    service: appserver
+    cmd: /app/vendor/bin/doctrine-dbal
+
+  npm:
+    service: node
+  node:
+    service: node
+  yarn:
+    service: node
+  gulp:
+    service: node
+
+  dev:
+    service: node
+    cmd: npm run dev
+
+  build:
+    service: node
+    cmd: npm run build
+
+# URLs de acesso via navegador
+proxy:
+  appserver:
+    - business-analysis.lndo.site
+  pma:
+    - pma.business-analysis.lndo.site
+  mailhog:
+    - mail.business-analysis.lndo.site
+  database:
+    - mysql.business-analysis.lndo.site
