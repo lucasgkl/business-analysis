@@ -17,7 +17,7 @@ services:
     portforward: 3377  # Permite conexão externa (ex: Workbench)
     host: 0.0.0.0
     creds:
-      database: business-analysis
+      database: business_analysis
       user: laravel
       password: laravel
 
