@@ -38,10 +38,37 @@ class CompanyComponent extends Component
         );
 
         $this->reset();
+    }
 
+    public function setCompanyModal(Company $company)
+    {
+        $this->id = $company->id;
+        $this->companyName = $company->name;
+        $this->tag = $company->tag;
+    }
+
+    public function setIdCompanyDelete(int $id)
+    {
+        $this->id = $id;
+    }
+
+    public function deleteCompany(Company $company)
+    {
+        $company->delete();
+    }
+
+
+    public function getCompanys()
+    {
+        return Company::orderBy('name', 'ASC')->paginate(15);
     }
     public function render()
     {
-        return view('livewire.company-component');
+        return view(
+            'livewire.company-component',
+            [
+                'companys' => $this->getCompanys(),
+            ]
+        );
     }
 }
