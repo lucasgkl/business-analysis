@@ -8,6 +8,7 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Class Price
@@ -19,6 +20,9 @@ use Illuminate\Database\Eloquent\Model;
  * @property float|null $pdy2a
  * @property int $company_id
  * @property Carbon|null $year
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property string|null $deleted_at
  * 
  * @property Company $company
  *
@@ -26,8 +30,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Price extends Model
 {
+	use SoftDeletes;
 	protected $table = 'prices';
-	public $timestamps = false;
 
 	protected $casts = [
 		'plpa4a' => 'float',
