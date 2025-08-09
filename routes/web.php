@@ -1,6 +1,7 @@
 <?php
 
 use App\Livewire\CompanyComponent;
+use App\Livewire\QuartelyResults;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,3 +20,4 @@ Route::get('/', function () {
 });
 
 Route::get('/companys', CompanyComponent::class)->name('companys');
+Route::get('/results', QuartelyResults::class)->name('results');

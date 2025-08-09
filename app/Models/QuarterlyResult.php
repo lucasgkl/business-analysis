@@ -6,7 +6,9 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Class QuarterlyResult
@@ -19,6 +21,11 @@ use Illuminate\Database\Eloquent\Model;
  * @property float $net_debt
  * @property int $company_id
  * @property string|null $quarter
+ * @property Carbon|null $start_date
+ * @property Carbon|null $end_date
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property string|null $deleted_at
  * 
  * @property Company $company
  *
@@ -26,8 +33,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class QuarterlyResult extends Model
 {
+	use SoftDeletes;
 	protected $table = 'quarterly_results';
-	public $timestamps = false;
 
 	protected $casts = [
 		'ebitda' => 'float',
@@ -35,7 +42,9 @@ class QuarterlyResult extends Model
 		'net_income' => 'float',
 		'gross_debt' => 'float',
 		'net_debt' => 'float',
-		'company_id' => 'int'
+		'company_id' => 'int',
+		'start_date' => 'datetime',
+		'end_date' => 'datetime'
 	];
 
 	protected $fillable = [
@@ -45,7 +54,9 @@ class QuarterlyResult extends Model
 		'gross_debt',
 		'net_debt',
 		'company_id',
-		'quarter'
+		'quarter',
+		'start_date',
+		'end_date'
 	];
 
 	public function company()
