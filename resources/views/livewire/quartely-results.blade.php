@@ -9,6 +9,23 @@
 
     </div>
 
+    <div class="form-group col-6 pb-4">
+        <label for="companyId" class="form-label"> Escolha a empresa:</label>
+        <select id="companyId" class="form-select" wire:model.live="companyId" name="companyId">
+            <option value="">---</option>
+
+            @foreach ($companys as $company)
+            <option value="{{ $company->id }}">
+                {{ $company->name }}
+            </option>
+            @endforeach
+        </select>
+
+        @error('companyId')
+        <span class="error text-danger">{{ $message }}</span>
+        @enderror
+
+    </div>
 
     <div>
         <table class="table">
@@ -123,7 +140,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="endDate" class="col-form-label">Empresa *</label>
-                            <select class="form-select" aria-label="Default select example"  wire:model="companyId">
+                            <select class="form-select" aria-label="Default select example" wire:model="companyId">
                                 <option selected>Secione a empresa *</option>
                                 @foreach($companys as $company)
                                 <option value="{{$company->id}}">{{$company->name}}</option>
