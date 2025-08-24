@@ -13,13 +13,19 @@ class Prices extends Component
     public $price_lpa2a;
     public $price_dy4a;
     public $price_dy2a;
-    public $company_id;
+    public $companyId;
     public $year;
 
 
     public function getPrices()
     {
-        return Price::orderBy('id', 'DESC')->paginate(15);
+        $pricesQuery = Price::select(['prices.*'])->orderBy('prices.id', 'desc');
+
+        if ($this->companyId) {
+            $pricesQuery->where('prices.company_id', '=', $this->companyId);
+        }
+        
+        return $pricesQuery->paginate(15);
     }
 
     public function getCompanys()
@@ -38,7 +44,7 @@ class Prices extends Component
                 'price_lpa2a' => $this->price_lpa2a,
                 'price_dy4a' => $this->price_dy4a,
                 'price_dy2a' => $this->price_dy2a,
-                'company_id' => $this->company_id,
+                'company_id' => $this->companyId,
                 'year' => $this->year,
             ]
         );
@@ -53,7 +59,7 @@ class Prices extends Component
         $this->price_lpa2a = $price->price_lpa2a;
         $this->price_dy4a = $price->price_dy4a;
         $this->price_dy2a = $price->price_dy2a;
-        $this->company_id = $price->company_id;
+        $this->companyId = $price->company_id;
         $this->year = $price->year;
     }
 

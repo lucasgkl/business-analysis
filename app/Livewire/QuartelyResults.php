@@ -77,7 +77,13 @@ class QuartelyResults extends Component
 
     public function getResults()
     {
-        return Result::orderBy('id', 'DESC')->paginate(15);
+        $resultsQuery = Result::select(['quarterly_results.*'])->orderBy('quarterly_results.id', 'desc');
+
+        if ($this->companyId) {
+            $resultsQuery->where('quarterly_results.company_id', '=', $this->companyId);
+        }
+
+        return $resultsQuery->paginate(15);
     }
     public function setIdResultsDelete(int $id)
     {
