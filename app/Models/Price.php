@@ -14,10 +14,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * Class Price
  * 
  * @property int $id
- * @property float|null $plpa4a
- * @property float|null $plpa2a
- * @property float|null $pdy4a
- * @property float|null $pdy2a
+ * @property float|null $price_lpa4a
+ * @property float|null $price_lpa2a
+ * @property float|null $price_dy4a
+ * @property float|null $price_dy2a
  * @property int $company_id
  * @property Carbon|null $year
  * @property Carbon|null $created_at
@@ -34,19 +34,19 @@ class Price extends Model
 	protected $table = 'prices';
 
 	protected $casts = [
-		'plpa4a' => 'float',
-		'plpa2a' => 'float',
-		'pdy4a' => 'float',
-		'pdy2a' => 'float',
+		'price_lpa4a' => 'float',
+		'price_lpa2a' => 'float',
+		'price_dy4a' => 'float',
+		'price_dy2a' => 'float',
 		'company_id' => 'int',
-		'year' => 'datetime'
+		'year' => 'int'
 	];
 
 	protected $fillable = [
-		'plpa4a',
-		'plpa2a',
-		'pdy4a',
-		'pdy2a',
+		'price_lpa4a',
+		'price_lpa2a',
+		'price_dy4a',
+		'price_dy2a',
 		'company_id',
 		'year'
 	];

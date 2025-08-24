@@ -50,7 +50,7 @@
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="{{ route('companys') }}">Empresas</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('results') }}">Resultados</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Sobre</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('prices') }}">Preço teto</a></li>
                 </ul>
             </div>
         </div>
