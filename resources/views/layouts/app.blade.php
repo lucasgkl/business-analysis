@@ -52,6 +52,15 @@
                     <li class="nav-item"><a class="nav-link" href="{{ route('results') }}">Resultados</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('prices') }}">Preço teto</a></li>
                 </ul>
+                <div class="dropdown">
+                    <button class="btn btn-dark btn-outline dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Gráficos
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-dark">
+                        <li><a class="dropdown-item" href="{{ route('chart-results') }}">Resultados</a></li>
+                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </nav>
