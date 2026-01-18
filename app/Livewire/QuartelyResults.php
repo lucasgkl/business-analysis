@@ -5,9 +5,12 @@ namespace App\Livewire;
 use App\Models\Company;
 use Livewire\Component;
 use App\Models\QuarterlyResult as Result;
+use Livewire\WithPagination;
+
 
 class QuartelyResults extends Component
-{
+{   
+    use WithPagination;
     public $id;
     public $ebitda;
     public $ebit;
@@ -77,13 +80,13 @@ class QuartelyResults extends Component
 
     public function getResults()
     {
-        $resultsQuery = Result::select(['quarterly_results.*'])->orderBy('quarterly_results.id', 'desc');
+        $resultsQuery = Result::select(['quarterly_results.*']);
 
         if ($this->companyId) {
             $resultsQuery->where('quarterly_results.company_id', '=', $this->companyId);
         }
 
-        return $resultsQuery->paginate(15);
+        return $resultsQuery->orderBy('quarterly_results.id', 'desc')->paginate(15);
     }
     public function setIdResultsDelete(int $id)
     {
@@ -99,7 +102,7 @@ class QuartelyResults extends Component
             'livewire.quartely-results',
             [
                 'results' => $this->getResults(),
-                'companys' => Company::all(),
+                'companys' => Company::orderBy('name')->get(),
             ]
         );
     }
