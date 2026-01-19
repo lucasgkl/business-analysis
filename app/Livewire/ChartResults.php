@@ -27,7 +27,19 @@ class ChartResults extends Component
             ->get();
 
         if ($group === 1) {
-            return $results->groupBy(fn($item) => $item->start_date->year);
+            return $results
+                ->groupBy(fn($item) => $item->start_date->year)
+                ->map(function ($yearResults) {
+                    $last = $yearResults->last();
+
+                    return [
+                        'ebitda'     => (float) $yearResults->sum('ebitda'),
+                        'ebit'       => (float) $yearResults->sum('ebit'),
+                        'net_income' => (float) $yearResults->sum('net_income'),
+                        'gross_debt' => (float) $last->gross_debt,
+                        'net_debt'   => (float) $last->net_debt,
+                    ];
+                });
         }
 
         return $results;
@@ -68,30 +80,12 @@ class ChartResults extends Component
                 $data = [
                     'labels' => $results->keys()->toArray(),
 
-                    'ebitda' => $results->map(
-                        fn($year) =>
-                        (float) $year->sum('ebitda')
-                    )->values()->toArray(),
+                    'ebitda' => $results->pluck('ebitda')->toArray(),
+                    'ebit'   => $results->pluck('ebit')->toArray(),
+                    'netIncome' => $results->pluck('net_income')->toArray(),
 
-                    'ebit' => $results->map(
-                        fn($year) =>
-                        (float) $year->sum('ebit')
-                    )->values()->toArray(),
-
-                    'netIncome' => $results->map(
-                        fn($year) =>
-                        (float) $year->sum('net_income')
-                    )->values()->toArray(),
-
-                    'db' => $results->map(
-                        fn($year) =>
-                        (float) $year->sum('gross_debt')
-                    )->values()->toArray(),
-
-                    'dl' => $results->map(
-                        fn($year) =>
-                        (float) $year->sum('net_debt')
-                    )->values()->toArray(),
+                    'db' => $results->pluck('gross_debt')->toArray(),
+                    'dl' => $results->pluck('net_debt')->toArray(),
                 ];
             } else {
                 $data = [
