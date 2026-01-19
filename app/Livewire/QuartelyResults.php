@@ -73,8 +73,8 @@ class QuartelyResults extends Component
         $this->grossDebt = $result->gross_debt;
         $this->netDebt = $result->net_debt;
         $this->quarter = $result->quarter;
-        $this->startDate = $result->start_date->format('Y-m-d');
-        $this->endDate = $result->end_date->format('Y-m-d');
+        $this->startDate = $result->start_date?->format('Y-m-d');
+        $this->endDate = $result->end_date?->format('Y-m-d');
         $this->companyId = $result->company_id;
     }
 
