@@ -9,7 +9,7 @@ use Livewire\WithPagination;
 
 
 class QuartelyResults extends Component
-{   
+{
     use WithPagination;
     public $id;
     public $ebitda;
@@ -61,7 +61,16 @@ class QuartelyResults extends Component
             ]
         );
 
-        $this->reset();
+        $this->reset(
+            'ebitda',
+            'ebit',
+            'netIncome',
+            'grossDebt',
+            'netDebt',
+            'quarter',
+            'startDate',
+            'endDate'
+        );
     }
 
     public function setResultsModal(Result $result)
