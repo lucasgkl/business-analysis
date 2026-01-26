@@ -58,7 +58,7 @@
                     </button>
                     <ul class="dropdown-menu dropdown-menu-dark">
                         <li><a class="dropdown-item" href="{{ route('chart-results') }}">Resultados</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                        <li><a class="dropdown-item" href="{{ route('chart-prices') }}">Preços</a></li>
                     </ul>
                 </div>
             </div>

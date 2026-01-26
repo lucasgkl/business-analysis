@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\ChartPrice;
 use App\Livewire\ChartResults;
 use App\Livewire\CompanyComponent;
 use App\Livewire\Prices;
@@ -25,3 +26,4 @@ Route::get('/companys', CompanyComponent::class)->name('companys');
 Route::get('/results', QuartelyResults::class)->name('results');
 Route::get('/prices', Prices::class)->name('prices');
 Route::get('/chart-results', ChartResults::class)->name('chart-results');
+Route::get('/chart-prices', ChartPrice::class)->name('chart-prices');
